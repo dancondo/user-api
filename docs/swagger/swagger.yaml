@@ -1,0 +1,59 @@
+definitions:
+  user.LoginUserResponseDto:
+    properties:
+      id:
+        type: string
+      token:
+        type: string
+      username:
+        type: string
+    type: object
+  user.UserRequestDto:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+  description: User API
+  title: User API
+  version: "1.0"
+paths:
+  /api/auth/login:
+    post:
+      consumes:
+      - application/json
+      description: User Login
+      parameters:
+      - description: the user email and password
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/user.UserRequestDto'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/user.LoginUserResponseDto'
+      summary: Get user email and password and return a token.
+      tags:
+      - auth
+  /api/health:
+    get:
+      description: Health check
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Check if the service is running.
+      tags:
+      - health
+swagger: "2.0"
