@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"time"
 
+	authAPI "github.com/dancondo/users-api/api/auth-api"
 	healthAPI "github.com/dancondo/users-api/api/health-api"
 	"github.com/dancondo/users-api/common"
 	_ "github.com/dancondo/users-api/docs/swagger"
@@ -15,9 +16,9 @@ import (
 	fiberSwagger "github.com/swaggo/fiber-swagger"
 )
 
-// @title Omnichannel Service API
+// @title User API
 // @version 1.0
-// @description Omnichannel Service API
+// @description User API
 
 // StartHTTP server
 func StartHTTP() error {
@@ -53,8 +54,10 @@ func CreateRouter() *fiber.App {
 
 	router := app.Group("/api")
 
+	authRouter := router.Group(authAPI.HandlerPath)
 	healthRouter := router.Group(healthAPI.HandlerPath)
 
+	authAPI.RegisterRoutes(authRouter)
 	healthAPI.RegisterRoutes(healthRouter)
 
 	app.Get("/docs/swagger/*", fiberSwagger.WrapHandler)
