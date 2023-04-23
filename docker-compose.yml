@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:4.4
+    ports:
+      - 27017:27017
+    command: mongod
+    healthcheck:
+      test: mongo --norc --quiet --host=localhost:27017 --eval "db.getMongo()"
+      interval: 30s
+      timeout: 2s
+      retries: 3
+      start_period: 15s
+  server:
+    image: server
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - 4040:4040
+    environment:
+      APP_ENV: dev
+      APP_PORT: 4040
+    depends_on:
+      mongo:
+        condition: service_healthy
+    entrypoint: ["users-api", "api"]
+  db-index:
+    image: server
+    depends_on:
+      mongo:
+        condition: service_healthy
+    entrypoint: ["users-api", "db-indexes"]
+  seed:
+    image: server
+    depends_on:
+      mongo:
+        condition: service_healthy
+    entrypoint: ["users-api", "seed"]
