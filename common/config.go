@@ -6,9 +6,9 @@ import (
 )
 
 var configuration = map[string]string{
-	"APP_ENV":           "dev",
-	"APP_SERVICE_TOKEN": "xpto",
-	"APP_NAME":          "users-api",
+	"APP_ENV":    "dev",
+	"APP_SECRET": "xpto",
+	"APP_NAME":   "users-api",
 
 	// LOG LEVEL
 	"LOG_LEVEL": "debug",
@@ -19,6 +19,10 @@ var configuration = map[string]string{
 	"HTTP_SERVER_WRITE_TIMEOUT_SECONDS":   "30",
 	"HTTP_SERVER_MAX_IDLE_CONNS":          "3",
 	"HTTP_SERVER_MAX_IDLE_CONNS_PER_HOST": "2",
+
+	// MONGO DB CONFIG
+	"MONGO_DATABASE": "users-api-db",
+	"MONGO_BASE_URI": "mongodb://mongo:27017",
 }
 
 // GetEnv
