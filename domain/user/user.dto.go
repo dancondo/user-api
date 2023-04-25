@@ -1,8 +1,6 @@
 package user
 
 import (
-	"fmt"
-
 	userRepository "github.com/dancondo/users-api/repository/user-repository"
 )
 
@@ -31,9 +29,9 @@ type LoginUserResponseDto struct {
 
 func NewUserDtoFromEntity(e *userRepository.UserEntity) *UserDto {
 	return &UserDto{
+		ID:       e.ID.Hex(),
 		Username: e.Username,
 		Password: e.Password,
-		ID:       fmt.Sprint(e.ID),
 	}
 }
 func (u *UserDto) ToUserResponseDto(token string) *LoginUserResponseDto {

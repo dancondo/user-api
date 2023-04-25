@@ -2,13 +2,11 @@ package userRepository
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/dancondo/users-api/common"
 	"github.com/dancondo/users-api/pkg/db"
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
@@ -69,15 +67,9 @@ func (r *usersRepository) Create(user *UserEntity) (*UserEntity, error) {
 		return nil, err
 	}
 
-	id, err := primitive.ObjectIDFromHex(fmt.Sprintf("%s", result.InsertedID))
-
-	if err != nil {
-		common.Log.Errorf("[USERS REPOSITORY] %v", err.Error())
-		return nil, err
-	}
+	common.Log.Errorf("[USERS REPOSITORY FOO BAR BAZ] %v", result.InsertedID)
 
 	return &UserEntity{
-		ID:       &id,
 		Username: user.Username,
 		Password: user.Password,
 	}, nil
