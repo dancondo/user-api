@@ -12,6 +12,7 @@ import (
 	_ "github.com/dancondo/users-api/docs/swagger"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	fiberSwagger "github.com/swaggo/fiber-swagger"
 )
@@ -48,8 +49,8 @@ func CreateRouter() *fiber.App {
 		WriteTimeout: time.Duration(common.GetEnvInt("HTTP_SERVER_WRITE_TIMEOUT_SECONDS")) * time.Second,
 	})
 
+	app.Use(cors.New())
 	app.Use(recover.New())
-
 	app.Use(compress.New())
 
 	router := app.Group("/api")
