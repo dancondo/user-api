@@ -2,21 +2,10 @@
 > This is a simple users api with authentication module.
 
 - [Users API](#users-api)
-  - [Code Owners](#code-owners)
   - [Description](#description)
-  - [APM](#apm)
   - [API Docs](#api-docs)
-  - [Coverage](#coverage)
   - [How to Run](#how-to-run)
   - [How to Test](#how-to-test)
-    - [Unit tests](#unit-tests)
-    - [Integration tests](#integration-tests)
-    - [Lint](#lint)
-  - [Architecture](#architecture)
-
-## Code Owners
-
-**GitHub**: [@dancondo/users-api](https://github.com/orgs/dancondo/users-api)
 
 ## Description
 
