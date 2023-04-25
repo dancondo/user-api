@@ -34,13 +34,13 @@ func LoginHandler(c *fiber.Ctx) error {
 	}
 
 	if user == nil {
-		return fiber.NewError(fiber.ErrUnauthorized.Code, fmt.Sprintf("username %s not found", userReq.Username))
+		return fiber.NewError(fiber.ErrUnauthorized.Code, fmt.Sprintf("Username %s not found", userReq.Username))
 	}
 
 	err = userService.ValidateUserPassword(user, userReq.Password)
 
 	if err != nil {
-		return fiber.NewError(fiber.ErrUnauthorized.Code, err.Error())
+		return fiber.NewError(fiber.ErrUnauthorized.Code, "Incorrect password")
 	}
 
 	token, err := authService.GenerateJWT(user.Username)
