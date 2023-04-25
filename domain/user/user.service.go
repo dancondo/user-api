@@ -1,9 +1,11 @@
 package user
 
 import (
+	"fmt"
+
 	"github.com/dancondo/users-api/common"
+	"github.com/dancondo/users-api/pkg/cryptography"
 	userRepository "github.com/dancondo/users-api/repository/user-repository"
-	"golang.org/x/crypto/bcrypt"
 )
 
 type UserService interface {
@@ -13,11 +15,13 @@ type UserService interface {
 }
 
 type userService struct {
+	crypto     cryptography.Crypto
 	repository userRepository.UsersRepository
 }
 
 func NewService() UserService {
 	return &userService{
+		crypto:     cryptography.New(),
 		repository: userRepository.New(),
 	}
 }
@@ -57,21 +61,15 @@ func (s *userService) GetUserByUsername(username string) (*UserDto, error) {
 }
 
 func (s *userService) ValidateUserPassword(user *UserDto, password string) error {
-	err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
+	valid := s.crypto.ValidatePassword(user.Password, password)
 
-	if err != nil {
-		return err
+	if !valid {
+		return fmt.Errorf("Invalid password")
 	}
 
 	return nil
 }
 
 func (s *userService) encryptPassword(password string) (string, error) {
-	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
-
-	if err != nil {
-		return "", err
-	}
-
-	return string(bytes), nil
+	return s.crypto.EncryptPassword(password)
 }
