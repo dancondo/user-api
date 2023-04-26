@@ -34,7 +34,13 @@ In this project you can find the following folders
 
 ## API Docs
 
-You can generate your swagger by running the command
+Install swagger with:
+
+```bash
+$ go get -u github.com/swaggo/swag/cmd/swag
+```
+
+You can generate your swagger by running the command:
 
 ```bash
 $ make swagger
@@ -49,6 +55,14 @@ After [running the application](#how-to-run) you will find it in the following l
 ### With Docker Compose
 
 You'll need to have [docker](https://docs.docker.com/engine/install/ubuntu/), [docker compose](https://docs.docker.com/compose/cli-command/#install-on-linux) plugin and [golang](https://go.dev/doc/install) installed.
+
+* **To run for the first time or after changes**
+
+```bash
+$ docker-compose up --build
+```
+
+* **To run if no changes were made**
 
 ```bash
 $ docker-compose up

@@ -60,14 +60,12 @@ func (r *usersRepository) Create(user *UserEntity) (*UserEntity, error) {
 
 	defer cancel()
 
-	result, err := r.collection.InsertOne(ctx, user)
+	_, err := r.collection.InsertOne(ctx, user)
 
 	if err != nil {
 		common.Log.Errorf("[USERS REPOSITORY] %v", err.Error())
 		return nil, err
 	}
-
-	common.Log.Errorf("[USERS REPOSITORY FOO BAR BAZ] %v", result.InsertedID)
 
 	return &UserEntity{
 		Username: user.Username,

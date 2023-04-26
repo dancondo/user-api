@@ -28,11 +28,16 @@ type LoginUserResponseDto struct {
 }
 
 func NewUserDtoFromEntity(e *userRepository.UserEntity) *UserDto {
-	return &UserDto{
-		ID:       e.ID.Hex(),
+	dto := &UserDto{
 		Username: e.Username,
 		Password: e.Password,
 	}
+
+	if e.ID != nil {
+		dto.ID = e.ID.Hex()
+	}
+
+	return dto
 }
 func (u *UserDto) ToUserResponseDto(token string) *LoginUserResponseDto {
 	return &LoginUserResponseDto{
