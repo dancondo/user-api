@@ -3,6 +3,7 @@
 
 - [Users API](#users-api)
   - [Description](#description)
+  - [Folder Structure](#folder-structure)
   - [API Docs](#api-docs)
   - [How to Run](#how-to-run)
   - [How to Test](#how-to-test)
@@ -10,6 +11,26 @@
 ## Description
 
 This is a simple golang API that provides a user module
+
+## Folder Structure
+
+In this project you can find the following folders
+
+- [api](api)
+    - The api module.
+    - In this folder you can find the API setup as well as the declaration of the endpoints.
+- [cmd](cmd)
+    - The application commands
+    - Each command has a file to start the desired part of the application.
+- [common](common)
+    - The application shared logic
+- [docs](docs)
+    - The application documentation.
+- [pkg](pkg)
+    - Standalone packages that can be reused in other applications.
+- [repository](repository)
+    - The application repositories, that may include databases and cache.
+
 
 ## API Docs
 
