@@ -58,11 +58,3 @@ $ make run/api
 ```bash
 make test/cover
 ```
-
-### Lint
-
-Just run:
-
-```bash
-make lint
-```
