@@ -25,11 +25,15 @@ After [running the application](#how-to-run) you will find it in the following l
 
 ## How to Run
 
+### With Docker Compose
+
 You'll need to have [docker](https://docs.docker.com/engine/install/ubuntu/), [docker compose](https://docs.docker.com/compose/cli-command/#install-on-linux) plugin and [golang](https://go.dev/doc/install) installed.
 
 ```bash
 $ docker-compose up
 ```
+
+### With local dependencies
 
 * **Install dependencies**
 
@@ -50,8 +54,6 @@ $ make run/api
 ```
 
 ## How to Test
-
-### 
 
 ```bash
 make test/cover
